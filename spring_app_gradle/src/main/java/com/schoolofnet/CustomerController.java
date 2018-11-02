@@ -35,7 +35,7 @@ public class CustomerController {
 	@GetMapping(path = "/{id}")
 	@ResponseBody
 	public Customer findOne(@PathVariable Long id) {
-		return repository.findOne(id);
+		return repository.findById(id).orElse(null);
 	}
 	
 	@GetMapping(path = "/name/{name}")
@@ -60,7 +60,7 @@ public class CustomerController {
 	@DeleteMapping(path = "/{id}")
 	@ResponseBody
 	public void destroy(@PathVariable Long id) {
-		Customer customer = repository.findOne(id);
+		Customer customer = repository.findById(id).orElse(null);
 		
 		if (customer != null) {			
 			repository.delete(customer);
